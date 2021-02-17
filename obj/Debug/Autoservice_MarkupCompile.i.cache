@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\User\source\repos\Autoservice\App.xaml
-3638699057
+7-2060151073
 21750853300
-36-280501714
+40-1353202925
 20576265145
-MainWindow.xaml;Pages\PageListClients.xaml;WinDows\AddEditClients.xaml;
+MainWindow.xaml;Pages\ClientPage.xaml;Pages\PageListClients.xaml;WinDows\AddEditClients.xaml;WinDows\AddTagsWindow.xaml;WinDows\ListDocClientWindow.xaml;WinDows\VisitsClient.xaml;
 
 True
 

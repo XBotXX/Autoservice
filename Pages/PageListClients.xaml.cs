@@ -26,6 +26,8 @@ namespace Autoservice.Pages
 
         List<string> countRows = new List<string>() { "10", "50", "200", "All Clients" };
 
+        List<Client> buffClientList = new List<Client>();
+
         public int countPage = 0;
 
         public int skipData = 0;
@@ -93,34 +95,9 @@ namespace Autoservice.Pages
             
         }
 
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                DateTime d = DateTime.Now.Date;
+        private void CheckBox_Checked(object sender, RoutedEventArgs e) => Filters();
 
-                DgClients.ItemsSource = Entities.GetContext().Client.Where(i => i.BirhDate == d).ToList();
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error");
-            }
-            
-        }
-
-        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                DgClients.ItemsSource = Entities.GetContext().Client.ToList();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error");
-            }
-           
-        }
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e) => Filters();
 
         private void BtnNextList_Click(object sender, RoutedEventArgs e)
         {
@@ -174,29 +151,7 @@ namespace Autoservice.Pages
             
         }
 
-        private void ComboNameGender_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            try
-            {
-                if (ComboNameGender.SelectedItem.ToString() == "All Genders")
-                {
-                    DgClients.ItemsSource = Entities.GetContext().Client.ToList();
-                }
-                else if (ComboNameGender.SelectedItem.ToString() == "Женский")
-                {
-                    DgClients.ItemsSource = Entities.GetContext().Client.Where(i => i.IdGender == "ж").ToList();
-                }
-                else if (ComboNameGender.SelectedItem.ToString() == "Мужской")
-                {
-                    DgClients.ItemsSource = Entities.GetContext().Client.Where(i => i.IdGender == "м").ToList();
-                }
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show("Error");
-            }
-            
-        }
+        private void ComboNameGender_SelectionChanged(object sender, SelectionChangedEventArgs e) => Filters();
 
         private void BtnAddClents_Click(object sender, RoutedEventArgs e)
         {
@@ -232,7 +187,9 @@ namespace Autoservice.Pages
                     Entities.GetContext().SaveChanges();
                 }
 
-                DgClients.Items.Refresh();
+                DgClients.ItemsSource = Entities.GetContext().Client.ToList();
+
+                //DgClients.Items.Refresh();
             }
             catch(Exception ex)
             {
@@ -263,6 +220,7 @@ namespace Autoservice.Pages
                     addEditClients.DtPikerBithDate.SelectedDate = client.BirhDate;
                     addEditClients.TxtEmall.Text = client.Email;
                     addEditClients.ImgFoto.Source = this.byteToImage(client.Photo);
+                    addEditClients.DgTag.ItemsSource = client.ListTag;
 
                     addEditClients.ShowDialog();
 
@@ -297,7 +255,9 @@ namespace Autoservice.Pages
 
                     DgClients.SelectedItem = client;
 
-                    DgClients.Items.Refresh();
+                    DgClients.ItemsSource = Entities.GetContext().Client.ToList();
+
+                    //DgClients.Items.Refresh();
                 }
             }
             catch(Exception ex)
@@ -324,23 +284,35 @@ namespace Autoservice.Pages
         {
             try
             {
+
                 if (DgClients.SelectedItem is Client client)
                 {
-                    var Client = Entities.GetContext().Client.Where(i => i.IdClient == client.IdClient).FirstOrDefault();
+                    MessageBoxResult result = MessageBox.Show("Удалить?", "Delete", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-                    if (!Entities.GetContext().ClientService.Where(i => i.IdClient == Client.IdClient).Any())
+                    if (result == MessageBoxResult.Yes)
                     {
-                        Entities.GetContext().Entry(Client).State = EntityState.Deleted;
+                        var Client = Entities.GetContext().Client.Where(i => i.IdClient == client.IdClient).FirstOrDefault();
 
-                        Entities.GetContext().SaveChanges();
+                        if (!Entities.GetContext().ClientService.Where(i => i.IdClient == Client.IdClient).Any())
+                        {
+                            Entities.GetContext().Entry(Client).State = EntityState.Deleted;
 
-                        DgClients.Items.Refresh();
+                            Entities.GetContext().SaveChanges();
+
+                            DgClients.ItemsSource = Entities.GetContext().Client.ToList();
+
+                            //DgClients.Items.Refresh();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Невозможно удалить");
+                        }
                     }
-                    else
-                    {
-                        MessageBox.Show("Невозможно удалить");
-                    }
-
+                    
+                }
+                else
+                {
+                    MessageBox.Show("Select item");
                 }
             }
             catch(Exception ex)
@@ -349,15 +321,114 @@ namespace Autoservice.Pages
             }
         }
 
-        private void TxtSearchClients_TextChanged(object sender, TextChangedEventArgs e)
+        private void TxtSearchClients_TextChanged(object sender, TextChangedEventArgs e) => Filters();
+
+        private void DgClients_LoadingRow(object sender, DataGridRowEventArgs e)
         {
-            DgClients.ItemsSource = Entities.GetContext().Client
+            if (e.Row.GetIndex() == 0)
+            {
+                CounterRow(DgClients.Items.Count);
+            }
+        }
+
+        public void CounterRow(int count)
+        {
+            LblCountRowFromAll.Content = count.ToString() + " From " + DgClients.Items.Count;
+        }
+
+        public void Filters()
+        {
+            buffClientList = Entities.GetContext().Client.ToList();
+
+            // Combo Start
+            try
+            {
+                if (ComboNameGender.SelectedItem.ToString() == "All Genders")
+                {
+                    buffClientList = Entities.GetContext().Client.ToList();
+                }
+                else if (ComboNameGender.SelectedItem.ToString() == "Женский")
+                {
+                    buffClientList = Entities.GetContext().Client.Where(i => i.IdGender == "ж").ToList();
+                }
+                else if (ComboNameGender.SelectedItem.ToString() == "Мужской")
+                {
+                    buffClientList = Entities.GetContext().Client.Where(i => i.IdGender == "м").ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error");
+            }
+            // Combo End
+
+            // Check Start
+            try
+            {
+                if (checkMonth.IsChecked == true)
+                {
+                    DateTime d = DateTime.Now.Date;
+                    buffClientList = buffClientList.Where(i => i.BirhDate.Month == d.Month).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error");
+            }
+            // Check End
+
+            // TextSearch Start
+            buffClientList = buffClientList
                 .Where(i =>
                 i.FirstName.Contains(TxtSearchClients.Text) ||
                 i.LastName.Contains(TxtSearchClients.Text) ||
                 i.MiddleName.Contains(TxtSearchClients.Text) ||
                 i.Email.Contains(TxtSearchClients.Text) ||
                 i.Phone.Contains(TxtSearchClients.Text)).ToList();
+            // TextSearch End
+
+            DgClients.ItemsSource = buffClientList.ToList();
+        }
+
+        private void BtnViewVisitsClient_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (DgClients.SelectedItem is Client client)
+                {
+                    if(client.ClientService.Count > 0)
+                    {
+                        VisitsClient visitsClient = new VisitsClient();
+
+                        visitsClient.Owner = Classes.ParentMainWindow.parentWindow;
+
+                        visitsClient.ListVisits.ItemsSource = client.ClientService;
+
+                        visitsClient.ShowDialog();
+
+                        if (visitsClient.DialogResult.HasValue && visitsClient.DialogResult.Value)
+                        {
+
+                        }
+
+                        DgClients.SelectedItem = client;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Do not History");
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Select item");
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error");
+            }
+            
         }
     }
 }

@@ -45,7 +45,7 @@
     <Key>
       <PropertyRef Name="IdClientTag" />
     </Key>
-    <Property Name="IdClientTag" Type="int" Nullable="false" />
+    <Property Name="IdClientTag" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdClient" Type="int" Nullable="false" />
     <Property Name="IdTag" Type="int" Nullable="false" />
   </EntityType>

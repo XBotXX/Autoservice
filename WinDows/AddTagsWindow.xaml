@@ -1,0 +1,29 @@
+﻿<Window x:Class="Autoservice.WinDows.AddTagsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Autoservice.WinDows"
+        mc:Ignorable="d"
+        Title="AddTagsWindow" Height="150" Width="400" WindowStartupLocation="CenterOwner">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="120"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label Content="Type Tag:" VerticalAlignment="Center" FontSize="20"/>
+        <ComboBox x:Name="ComboTypeTag" Grid.Column="1" VerticalAlignment="Center" FontSize="20" Margin="10"/>
+
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="BtnSave" Grid.Column="1" Content="Save" Margin="10" FontSize="15" Background="Orange" Click="BtnSave_Click"/>
+        </Grid>
+    </Grid>
+</Window>

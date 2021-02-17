@@ -16,6 +16,7 @@
         <Label Content="ООО &quot;Поломка&quot;" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"/>
         <Image Source="Resources/service_logo.png" HorizontalAlignment="Left" Margin="5,5,0,5"/>
         <Button x:Name="BackBtn" Content="Back" HorizontalAlignment="Right" Margin="0,0,5,0" Width="150" Height="25" Click="BackBtn_Click"/>
+        <Button x:Name="ClientBtn" Content="Client" HorizontalAlignment="Right" Margin="0,0,220,0" Width="150" Height="25" Click="ClientBtn_Click"/>
         <Frame Grid.Row="1" x:Name="MainFrame" ContentRendered="MainFrame_ContentRendered" NavigationUIVisibility="Hidden"/>
         <Border Background="LightYellow" Grid.Row="2"/>
     </Grid>

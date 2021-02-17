@@ -50,5 +50,10 @@ namespace Autoservice
             }
 
         }
+
+        private void ClientBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new Pages.ClientPage());
+        }
     }
 }

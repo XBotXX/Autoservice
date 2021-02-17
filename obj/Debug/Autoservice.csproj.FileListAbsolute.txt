@@ -26,3 +26,11 @@ C:\Users\User\source\repos\Autoservice\obj\Debug\Pages\PageListClients.g.cs
 C:\Users\User\source\repos\Autoservice\obj\Debug\Pages\PageListClients.baml
 C:\Users\User\source\repos\Autoservice\obj\Debug\WinDows\AddEditClients.g.cs
 C:\Users\User\source\repos\Autoservice\obj\Debug\WinDows\AddEditClients.baml
+C:\Users\User\source\repos\Autoservice\obj\Debug\WinDows\AddTagsWindow.g.cs
+C:\Users\User\source\repos\Autoservice\obj\Debug\WinDows\AddTagsWindow.baml
+C:\Users\User\source\repos\Autoservice\obj\Debug\WinDows\VisitsClient.g.cs
+C:\Users\User\source\repos\Autoservice\obj\Debug\WinDows\VisitsClient.baml
+C:\Users\User\source\repos\Autoservice\obj\Debug\WinDows\ListDocClientWindow.g.cs
+C:\Users\User\source\repos\Autoservice\obj\Debug\WinDows\ListDocClientWindow.baml
+C:\Users\User\source\repos\Autoservice\obj\Debug\Pages\ClientPage.g.cs
+C:\Users\User\source\repos\Autoservice\obj\Debug\Pages\ClientPage.baml

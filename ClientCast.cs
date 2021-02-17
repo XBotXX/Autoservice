@@ -38,4 +38,48 @@ namespace Autoservice
             }
         }
     }
+
+    public partial class Client
+    {
+        public int CountListClientService
+        {
+            get
+            {
+                return ClientService.Count();
+            }
+        }
+    }
+
+    public partial class Client
+    {
+        public decimal SumClientService
+        {
+            get
+            {
+                return ClientService.Select(i => i.Service).Sum(i=>i.Price);
+            }
+        }
+    }
+
+    public partial class ClientService
+    {
+        public List<ClientServiceDocument> ListClient
+        {
+            get
+            {
+                return ClientServiceDocument.ToList();
+            }
+        }
+    }
+
+    public partial class ClientService
+    {
+        public int CountListClient
+        {
+            get
+            {
+                return ClientServiceDocument.ToList().Count();
+            }
+        }
+    }
 }

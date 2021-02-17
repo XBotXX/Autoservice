@@ -29,7 +29,7 @@
         
         <Label Grid.Row="1" Content="Name:" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"/>
         <TextBox x:Name="TxtFirstName" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" FontSize="15" Margin="0,0,20,0"/>
-        
+
         <Label Grid.Row="2" Content="Surname:" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"/>
         <TextBox x:Name="TxtLastName" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" FontSize="15" Margin="0,0,20,0"/>
         
@@ -53,28 +53,31 @@
         <Button x:Name="BtnOpenFileDialog" Content="Open..." Grid.Column="2" Grid.Row="4" FontSize="15" Margin="20,0,20,0" VerticalAlignment="Center" Background="Orange" Click="BtnOpenFileDialog_Click"/>
 
         <Label Grid.Row="5" Grid.Column="2" Content="Tag:" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"/>
-        <DataGrid x:Name="DgTag" Grid.Column="2" Grid.Row="6" Margin="20,0,20,0" Grid.RowSpan="3">
+        <DataGrid x:Name="DgTag" Grid.Column="2" Grid.Row="6" Margin="20,0,20,0" Grid.RowSpan="3" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTemplateColumn Width="*" Header="теги">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <ItemsControl ItemsSource="{Binding ListTag}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Name}">
-                                            <TextBlock.Background>
-                                                <SolidColorBrush Color="{Binding Color}"/>
-                                            </TextBlock.Background>
-                                        </TextBlock>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
+                <DataGridTemplateColumn Header="Tags" Width="*">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+                            <TextBlock Text="{Binding NameTag}">
+                                <TextBlock.Background>
+                                    <SolidColorBrush Color="{Binding ColorTag}"/>
+                                </TextBlock.Background>
+                            </TextBlock>
                         </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="BtnAddTag" Content="Add Tag" Grid.Column="2" Grid.Row="9" FontSize="15" Margin="20,0,20,0" VerticalAlignment="Center" Background="Orange"/>
+
+        <Grid Grid.Row="9" Grid.Column="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="BtnAddTag" Content="Add Tag" Grid.Column="0" FontSize="15" Margin="20,0,20,0" VerticalAlignment="Center" Background="Orange" Click="BtnAddTag_Click"/>
+            <Button x:Name="BtnDelateTag" Content="Del Tag" Grid.Column="1" FontSize="15" Margin="20,0,20,0" VerticalAlignment="Center" Background="Orange" Click="BtnDelateTag_Click"/>
+        </Grid>
+        
 
         <Button x:Name="BtnSave" Content="Save" Grid.Column="1" Grid.Row="9" FontSize="15" Margin="0,0,20,0" VerticalAlignment="Center" Background="Orange" Click="BtnSave_Click"/>
     </Grid>

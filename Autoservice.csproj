@@ -114,6 +114,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ClientPage.xaml.cs">
+      <DependentUpon>ClientPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\PageListClients.xaml.cs">
       <DependentUpon>PageListClients.xaml</DependentUpon>
     </Compile>
@@ -150,6 +153,15 @@
     <Compile Include="WinDows\AddEditClients.xaml.cs">
       <DependentUpon>AddEditClients.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WinDows\AddTagsWindow.xaml.cs">
+      <DependentUpon>AddTagsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WinDows\ListDocClientWindow.xaml.cs">
+      <DependentUpon>ListDocClientWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WinDows\VisitsClient.xaml.cs">
+      <DependentUpon>VisitsClient.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -163,11 +175,27 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\ClientPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\PageListClients.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WinDows\AddEditClients.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WinDows\AddTagsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WinDows\ListDocClientWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WinDows\VisitsClient.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
