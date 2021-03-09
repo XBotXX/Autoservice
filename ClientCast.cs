@@ -61,6 +61,17 @@ namespace Autoservice
         }
     }
 
+    public partial class Client
+    {
+        public string ColorClientService
+        {
+            get
+            {
+                return SumClientService > 500 ? "Green" : "Red";
+            }
+        }
+    }
+
     public partial class ClientService
     {
         public List<ClientServiceDocument> ListClient
